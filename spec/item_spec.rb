@@ -14,6 +14,9 @@ RSpec.describe Item do
     it 'has attributes' do
       expect(@item1.name).to eq('Chalkware Piggy Bank')
       expect(@item1.instance_variable_get(:@bids)).to eq({})
+
+      expect(@item2.name).to eq('Bamboo Picture Frame')
+      expect(@item2.instance_variable_get(:@bids)).to eq({})
     end
   end
 end
