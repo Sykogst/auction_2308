@@ -130,11 +130,32 @@ RSpec.describe Auction do
     end
   end
 
-  describe '#close_auction' do
+  describe '#close_auction, #each_item_highest_attendee' do
     # Purchase only what can be afforded
     # Multiple bids - Most expensive to least expensive
     # Out of budget, next highest bidder wins
-    it 'items, attendee that won or not sold' do
+    xit 'items, each with highest bidding attendee' do
+      @auction.add_item(@item1)
+      @auction.add_item(@item2)
+      @auction.add_item(@item3)
+      @auction.add_item(@item4)
+      @auction.add_item(@item5)
+
+      @item1.add_bid(@attendee2, 70)
+      @item1.add_bid(@attendee1, 22)
+      @item4.add_bid(@attendee3, 50)
+      @item3.add_bid(@attendee2, 15)
+      @item3.add_bid(@attendee3, 20)
+
+      expect(@auction.each_item_highest_attendee).to eq({@item1 => @attendee2, 
+                                                         @item2 => nil, 
+                                                         @item3 => @attendee3, 
+                                                         @item4 => @attendee3, 
+                                                         @item5 => nil
+                                                        })
+    end
+
+    xit 'items, attendee that won or not sold' do
       @auction.add_item(@item1)
       @auction.add_item(@item2)
       @auction.add_item(@item3)

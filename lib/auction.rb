@@ -71,4 +71,21 @@ class Auction
   end
 
   def close_auction
+    # Hash of item obj => highest bid amount
+    each_item_highest_bid
+  end
+
+  def each_item_highest_attendee
+    highest_bidder = Hash.new
+    @items.each do |item|
+      all_bids = item.bids
+      max_bidder = all_bids.max_by { |attendee, amount| amount }
+      highest_bidder[item] = max_bidder
+    end
+    item_bids = highest_bidder
+    item_bids.reduce({}) do |final, (item, high_bid)|
+      final[item] = high_bid
+      final
+    end
+  end
 end
