@@ -2,6 +2,7 @@ class Auction
   attr_reader :items
   def initialize
     @items = []
+    @date = Date.today
   end
 
   def add_item(item)
@@ -61,6 +62,30 @@ class Auction
         bidder_info[attendee] = Hash[budget: attendee.budget, items: attendee_item_bids(attendee)]
       end
       bidder_info
+    end
+  end
+
+  def date
+    bad_date = @date.to_s
+    correct_date_format = "#{bad_date[8..9]}/#{bad_date[5..6]}/#{bad_date[0..3]}"
+  end
+
+  def close_auction
+    # Hash of item obj => highest bid amount
+    each_item_highest_bid
+  end
+
+  def each_item_highest_attendee
+    highest_bidder = Hash.new
+    @items.each do |item|
+      all_bids = item.bids
+      max_bidder = all_bids.max_by { |attendee, amount| amount }
+      highest_bidder[item] = max_bidder
+    end
+    item_bids = highest_bidder
+    item_bids.reduce({}) do |final, (item, high_bid)|
+      final[item] = high_bid
+      final
     end
   end
 end
