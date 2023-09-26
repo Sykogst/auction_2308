@@ -65,5 +65,7 @@ class Auction
     end
   end
 
-  
+  def date
+    @date
+  end
 end
