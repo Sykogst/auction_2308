@@ -8,4 +8,9 @@ class Item
   def add_bid(attendee, bid_amount)
     @bids[attendee] = bid_amount
   end
+
+  def current_high_bid
+    max_bidder = @bids.max_by { |attendee, bid_amt| bid_amt }
+    max_bidder[1]
+  end
 end

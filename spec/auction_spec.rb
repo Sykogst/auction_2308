@@ -6,6 +6,9 @@ RSpec.describe Auction do
 
     @item1 = Item.new('Chalkware Piggy Bank')
     @item2 = Item.new('Bamboo Picture Frame')
+    @item3 = Item.new('Homemade Chocolate Chip Cookies')
+    @item4 = Item.new('2 Days Dogsitting')
+    @item5 = Item.new('Forever Stamps')
   end
 
   describe '#initialize' do
