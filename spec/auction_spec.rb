@@ -115,7 +115,7 @@ RSpec.describe Auction do
       expect(@auction.attendee_item_bids(@attendee2)).to eq([@item1, @item3])
     end
 
-    xit 'returns attendee OBJ with budget INT and items OBJ bid on' do
+    it 'returns attendee OBJ with budget INT and items OBJ bid on' do
       expect(@auction.bidder_info).to eq({ @attendee2 => { budget: 75, items: [@item1, @item3] },
                                            @attendee1 => { budget: 50, items: [@item1] },
                                            @attendee3 => { budget: 100, items: [@item4] }

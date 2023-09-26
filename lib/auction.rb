@@ -54,4 +54,13 @@ class Auction
     end
     items_bid_on
   end
+
+  def bidder_info
+    @items.reduce({}) do |bidder_info, item|
+      item.bids.each do |attendee, bid|
+        bidder_info[attendee] = Hash[budget: attendee.budget, items: attendee_item_bids(attendee)]
+      end
+      bidder_info
+    end
+  end
 end
