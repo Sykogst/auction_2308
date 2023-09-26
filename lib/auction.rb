@@ -69,4 +69,6 @@ class Auction
     bad_date = @date.to_s
     correct_date_format = "#{bad_date[8..9]}/#{bad_date[5..6]}/#{bad_date[0..3]}"
   end
+
+  def close_auction
 end

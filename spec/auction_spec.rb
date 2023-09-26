@@ -131,6 +131,9 @@ RSpec.describe Auction do
   end
 
   describe '#close_auction' do
+    # Purchase only what can be afforded
+    # Multiple bids - Most expensive to least expensive
+    # Out of budget, next highest bidder wins
     it 'items, attendee that won or not sold' do
       @auction.add_item(@item1)
       @auction.add_item(@item2)
@@ -138,14 +141,15 @@ RSpec.describe Auction do
       @auction.add_item(@item4)
       @auction.add_item(@item5)
 
-      @item1.add_bid(@attendee2, 20)
+      @item1.add_bid(@attendee2, 70)
       @item1.add_bid(@attendee1, 22)
       @item4.add_bid(@attendee3, 50)
       @item3.add_bid(@attendee2, 15)
+      @item3.add_bid(@attendee3, 20)
 
       expect(@auction.close_auction).to eq({@item1 => @attendee1,
                                             @item2 => 'Not Sold',
-                                            @item3 => @attendee2,
+                                            @item3 => @attendee3,
                                             @item4 => @attendee3,
                                             @item5 => 'Not Sold',
                                           })
