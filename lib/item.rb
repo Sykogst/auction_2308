@@ -7,7 +7,8 @@ class Item
   end
 
   def add_bid(attendee, bid_amount)
-    @bids[attendee] = bid_amount
+    no_bid_memo = 'Cannot bid, auction for item is closed'
+    closed? ? no_bid_memo : @bids[attendee] = bid_amount
   end
 
   def current_high_bid
