@@ -5,7 +5,6 @@ RSpec.describe Attendee do
     @attendee1 = Attendee.new({name: 'Megan', budget: '$50'})
     @attendee2 = Attendee.new({name: 'Bob', budget: '$75'})
     @attendee3 = Attendee.new({name: 'Mike', budget: '$100'})
-    
   end
 
   describe '#initialize' do
