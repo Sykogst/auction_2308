@@ -74,7 +74,7 @@ RSpec.describe Auction do
       expect(@auction.each_item_highest_bid).to eq({@item1 => 22, @item4 => 50, @item3 => 15})
     end
 
-    xit 'returns total of highest bid from each item' do
+    it 'returns total of highest bid from each item' do
       expect(@auction.potential_revenue).to eq(87)
     end
   end

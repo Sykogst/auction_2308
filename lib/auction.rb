@@ -28,4 +28,9 @@ class Auction
       final
     end
   end
+
+  def potential_revenue
+    highe_bids = each_item_highest_bid.values
+    highe_bids.reduce(0) { |sum, bid| sum += bid }
+  end
 end
