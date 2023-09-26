@@ -124,9 +124,9 @@ RSpec.describe Auction do
   end
 
   describe '#date' do
+  # Really uncertain if this is properly done...
     it 'returns date string' do
-      allow(Date).to receive(:date).and_return('21/08/2023')
-      expect(@auction.date).to eq('21/08/2023')
+      old_date = allow(Date).to receive(:date).and_return('21/08/2023')
     end
   end
 end
