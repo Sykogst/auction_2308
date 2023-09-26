@@ -18,4 +18,8 @@ class Item
   def closed?
     @closed
   end
+
+  def close_bidding
+    @closed = true
+  end
 end
