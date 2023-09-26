@@ -95,4 +95,34 @@ RSpec.describe Auction do
       expect(@auction.bidders).to eq(['Bob', 'Megan', 'Mike'])
     end
   end
+
+  describe '#bidder_info, #attendee_item_bids' do
+    before(:each) do
+      @auction.add_item(@item1)
+      @auction.add_item(@item2)
+      @auction.add_item(@item3)
+      @auction.add_item(@item4)
+      @auction.add_item(@item5)
+
+      @item1.add_bid(@attendee2, 20)
+      @item1.add_bid(@attendee1, 22)
+      @item4.add_bid(@attendee3, 50)
+      @item3.add_bid(@attendee2, 15)
+    end
+  # hash; Attendee OBJ => subHash
+  # subHash; budget: budget value INT, items: array of items
+    it 'returns attendee and items bid on' do
+      expect(@auction.attendee_item_bids).to eq({ @attendee2 => [@item1, @item3],
+                                                  @attendee1 => [@item1],
+                                                  @attendee3 => [@item4]
+                                                })
+    end
+
+    it 'returns attendee OBJ with budget INT and items OBJ bid on' do
+      expect(@auction.bidder_info).to eq({ @attendee2 => { budget: 75, items: [@item1, @item3] },
+                                           @attendee1 => { budget: 50, items: [@item1] },
+                                           @attendee3 => { budget: 100, items: [@item4] }
+                                        })
+    end
+  end
 end
