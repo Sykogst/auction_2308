@@ -3,6 +3,7 @@ class Item
   def initialize(item_name)
     @name = item_name
     @bids = {}
+    
   end
 
   def add_bid(attendee, bid_amount)
