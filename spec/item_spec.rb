@@ -52,6 +52,10 @@ RSpec.describe Item do
   end
 
   describe '#close_bidding, #closed?' do
+    it 'returns auction status' do
+      expect(@item1.closed?).to be false
+    end
+
     it 'no longer allows bidding when closed' do
       expect(@item1.bids).to eq({})
       expect(@item1.closed?).to be false

@@ -14,4 +14,8 @@ class Item
     max_bidder = @bids.max_by { |attendee, bid_amt| bid_amt }
     max_bidder[1]
   end
+
+  def closed?
+    @closed
+  end
 end
