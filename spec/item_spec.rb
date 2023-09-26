@@ -21,9 +21,11 @@ RSpec.describe Item do
     it 'has attributes' do
       expect(@item1.name).to eq('Chalkware Piggy Bank')
       expect(@item1.instance_variable_get(:@bids)).to eq({})
+      expect(@item1.instance_variable_get(:@closed)).to be false
 
       expect(@item2.name).to eq('Bamboo Picture Frame')
       expect(@item2.instance_variable_get(:@bids)).to eq({})
+      expect(@item1.instance_variable_get(:@closed)).to be false
     end
   end
 
@@ -49,7 +51,7 @@ RSpec.describe Item do
     end
   end
 
-  describe '#close_bidding' do
+  describe '#close_bidding, #closed?' do
     it 'no longer allows bidding when closed' do
       expect(@item1.bids).to eq({})
       expect(@item1.closed?).to be false
