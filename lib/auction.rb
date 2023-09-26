@@ -33,4 +33,34 @@ class Auction
     highe_bids = each_item_highest_bid.values
     highe_bids.reduce(0) { |sum, bid| sum += bid }
   end
+
+  def bidders
+    @items.reduce([]) do |names, item|
+      bid_attendee = item.bids.keys
+      bid_attendee.each do |bid|
+        names << bid.name
+      end
+      names.uniq
+    end
+  end
+
+  def attendee_item_bids(attendee)
+    items_bid_on = []
+    @items.each do |item|
+      bidders = item.bids.keys
+      bidders.each do |bidder|
+        items_bid_on << item if bidder.name == attendee.name
+      end
+    end
+    items_bid_on
+  end
+
+  def bidder_info
+    @items.reduce({}) do |bidder_info, item|
+      item.bids.each do |attendee, bid|
+        bidder_info[attendee] = Hash[budget: attendee.budget, items: attendee_item_bids(attendee)]
+      end
+      bidder_info
+    end
+  end
 end

@@ -21,9 +21,11 @@ RSpec.describe Item do
     it 'has attributes' do
       expect(@item1.name).to eq('Chalkware Piggy Bank')
       expect(@item1.instance_variable_get(:@bids)).to eq({})
+      expect(@item1.instance_variable_get(:@closed)).to be false
 
       expect(@item2.name).to eq('Bamboo Picture Frame')
       expect(@item2.instance_variable_get(:@bids)).to eq({})
+      expect(@item1.instance_variable_get(:@closed)).to be false
     end
   end
 
@@ -46,6 +48,29 @@ RSpec.describe Item do
       expect(@item1.bids).to eq({@attendee2 => 20, @attendee1 => 22})
 
       expect(@item1.current_high_bid).to eq(22)
+    end
+  end
+
+  describe '#close_bidding, #closed?' do
+    it 'returns auction status' do
+      expect(@item1.closed?).to be false
+
+      @item1.close_bidding
+      expect(@item1.closed?).to be true
+    end
+
+    it 'no longer allows bidding when closed' do
+      expect(@item1.bids).to eq({})
+      expect(@item1.closed?).to be false
+      @item1.add_bid(@attendee2, 20)
+      expect(@item1.bids).to eq({@attendee2 => 20})
+
+      @item1.close_bidding
+      expect(@item1.closed?).to be true
+      expect(@item1.add_bid(@attendee1, 25)).to eq('Cannot bid, auction for item is closed')
+
+      @item2.add_bid(@attendee1, 25)
+      expect(@item2.bids).to eq({@attendee1 => 25})
     end
   end
 end
