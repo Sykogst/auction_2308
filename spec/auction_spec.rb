@@ -129,4 +129,26 @@ RSpec.describe Auction do
       old_date = allow(Date).to receive(:date).and_return('21/08/2023')
     end
   end
+
+  describe '#close_auction' do
+    it 'items, attendee that won or not sold' do
+      @auction.add_item(@item1)
+      @auction.add_item(@item2)
+      @auction.add_item(@item3)
+      @auction.add_item(@item4)
+      @auction.add_item(@item5)
+
+      @item1.add_bid(@attendee2, 20)
+      @item1.add_bid(@attendee1, 22)
+      @item4.add_bid(@attendee3, 50)
+      @item3.add_bid(@attendee2, 15)
+
+      expect(@auction.close_auction).to eq({@item1 => @attendee1,
+                                            @item2 => 'Not Sold',
+                                            @item3 => @attendee2,
+                                            @item4 => @attendee3,
+                                            @item5 => 'Not Sold',
+                                          })
+    end
+  end
 end
