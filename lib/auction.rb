@@ -2,6 +2,7 @@ class Auction
   attr_reader :items
   def initialize
     @items = []
+    @date = Date.today
   end
 
   def add_item(item)
@@ -63,4 +64,6 @@ class Auction
       bidder_info
     end
   end
+
+  
 end
