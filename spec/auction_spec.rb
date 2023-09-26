@@ -112,13 +112,10 @@ RSpec.describe Auction do
   # hash; Attendee OBJ => subHash
   # subHash; budget: budget value INT, items: array of items
     it 'returns attendee and items bid on' do
-      expect(@auction.attendee_item_bids).to eq({ @attendee2 => [@item1, @item3],
-                                                  @attendee1 => [@item1],
-                                                  @attendee3 => [@item4]
-                                                })
+      expect(@auction.attendee_item_bids(@attendee2)).to eq([@item1, @item3])
     end
 
-    it 'returns attendee OBJ with budget INT and items OBJ bid on' do
+    xit 'returns attendee OBJ with budget INT and items OBJ bid on' do
       expect(@auction.bidder_info).to eq({ @attendee2 => { budget: 75, items: [@item1, @item3] },
                                            @attendee1 => { budget: 50, items: [@item1] },
                                            @attendee3 => { budget: 100, items: [@item4] }

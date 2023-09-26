@@ -43,4 +43,15 @@ class Auction
       names.uniq
     end
   end
+
+  def attendee_item_bids(attendee)
+    items_bid_on = []
+    @items.each do |item|
+      bidders = item.bids.keys
+      bidders.each do |bidder|
+        items_bid_on << item if bidder.name == attendee.name
+      end
+    end
+    items_bid_on
+  end
 end
